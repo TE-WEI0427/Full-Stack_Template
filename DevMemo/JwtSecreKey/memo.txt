@@ -1,0 +1,26 @@
+https://www.devglan.com/online-tools/hmac-sha256-online
+
+
+Plain Text			:	The Net Core 6 WebApi MVC Sample
+
+Secret Key			: 	NC6_WAMVC_20230812_AndyHsu
+
+-----------------------------------------------------------------------------------------------------
+
+Cryptographic		: 	SHA-256
+
+Output Text Format	:	
+	
+	Base64	=>	Z4T9mdppztWKMsN9+Z6OHoopZOmjmvtDvTzuFkykKRo=
+
+	Hex		=>	6784fd99da69ced58a32c37df99e8e1e8a2964e9a39afb43bd3cee164ca4291a
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Cryptographic		: 	SHA-512
+
+Output Text Format	:	
+	
+	Base64	=>	B1UTnmcwau794Em+oK/12XOlxbdVEbptAtc4fHCTjt8QnGfEI6NL9eH9QiZb+szbCpP1CVZpc6+jlU9n/FpUGw==
+
+	Hex		=>	0755139e67306aeefde049bea0aff5d973a5c5b75511ba6d02d7387c70938edf109c67c423a34bf5e1fd42265bfaccdb0a93f509566973afa3954f67fc5a541b
