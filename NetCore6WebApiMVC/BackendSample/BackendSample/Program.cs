@@ -1,7 +1,17 @@
+using Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+#region Infrastructure
+builder.SetConfig();
+builder.SetService();
+builder.SetCors();
+#endregion
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -13,10 +23,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// from Infrastructure
+app.AppBuilder();
+
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors();
+
+app.UseAuthentication();// 先驗證，驗證沒過再嘗試授權
 
 app.UseAuthorization();
 

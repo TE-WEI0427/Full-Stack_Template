@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\JwtLib\JwtLib.csproj" />
+    <ProjectReference Include="..\..\SwaggerLib\SwaggerLib.csproj" />
   </ItemGroup>
 
 </Project>

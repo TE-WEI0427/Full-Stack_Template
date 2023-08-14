@@ -43,7 +43,6 @@ namespace JwtLib
             PropertyInfo[] infos = typeof(T).GetProperties();
             foreach (PropertyInfo info in infos)
             {
-
                 if (jToken?[info.Name] != null)
                 {
                     Claim claim = new(info.Name, jToken?[info.Name]!.ToString() ?? "");

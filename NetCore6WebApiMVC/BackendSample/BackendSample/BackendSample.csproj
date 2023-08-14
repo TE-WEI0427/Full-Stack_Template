@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\RunDll_Proj\JwtLib\JwtLib.csproj" />
+    <Reference Include="JwtLib">
+      <HintPath>..\RunDll\JwtLib\JwtLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SwaggerLib">
+      <HintPath>..\RunDll\SwaggerLib\SwaggerLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

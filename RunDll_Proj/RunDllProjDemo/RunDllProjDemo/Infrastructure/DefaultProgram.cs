@@ -1,4 +1,5 @@
 ﻿using JwtLib;
+using SwaggerLib;
 
 namespace Infrastructure
 {
@@ -55,6 +56,18 @@ namespace Infrastructure
                                          //.AllowCredentials();
                                      });
                });
+        }
+
+        /// <summary>
+        /// app Builder
+        /// </summary>
+        /// <param name="app">Web 應用程序</param>
+        public static void AppBuilder(this WebApplication app)
+        {
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwaggerPage();
+            }
         }
     }
 }
