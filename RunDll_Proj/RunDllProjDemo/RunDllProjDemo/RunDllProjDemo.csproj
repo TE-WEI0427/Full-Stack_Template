@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BaseLib\BaseLib.csproj" />
+    <ProjectReference Include="..\..\BasicConfig\BasicConfig.csproj" />
     <ProjectReference Include="..\..\JwtLib\JwtLib.csproj" />
     <ProjectReference Include="..\..\SwaggerLib\SwaggerLib.csproj" />
   </ItemGroup>

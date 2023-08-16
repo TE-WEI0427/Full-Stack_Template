@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="BaseLib">
+      <HintPath>..\RunDll\BaseLib\BaseLib.dll</HintPath>
+    </Reference>
+    <Reference Include="BasicConfig">
+      <HintPath>..\RunDll\BasicConfig\BasicConfig.dll</HintPath>
+    </Reference>
     <Reference Include="JwtLib">
       <HintPath>..\RunDll\JwtLib\JwtLib.dll</HintPath>
     </Reference>
