@@ -5,16 +5,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-#region (3) - (5) DefaultProgram
-// (3) Config
+#region (J-3) - (J-5) DefaultProgram
+// (J-3) Config
 builder.SetConfig();
-// (4) Service
+// (J-4) Service
 builder.SetService();
-// (5) Cors
+// (J-5) Cors
 builder.SetCors();
 #endregion
 
-// (6) HttpContextAccessor 
+// (J-6) HttpContextAccessor 
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
@@ -27,7 +27,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// (7) Use Swagger from DefaultProgram
+// (sw-3) DefaultProgram
 app.AppBuilder();
 
 //app.UseHttpsRedirection();
@@ -35,10 +35,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// (8) Use Cors
+// (J-7) Use Cors
 app.UseCors();
 
-// (9) Use Authentication
+// (J-8) Use Authentication
 app.UseAuthentication();// 先驗證，驗證沒過再嘗試授權
 
 app.UseAuthorization();

@@ -3,7 +3,7 @@ using SwaggerLib;
 
 namespace Infrastructure
 {
-    // (2) Program
+    // (J-2) Program
     public static class DefaultProgram
     {
         /// <summary>
@@ -24,7 +24,9 @@ namespace Infrastructure
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetService(this WebApplicationBuilder builder)
         {
+            // (sw-1)
             builder.AddJwtSwagger();
+
             builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
         }
 
@@ -66,6 +68,7 @@ namespace Infrastructure
         {
             if (app.Environment.IsDevelopment())
             {
+                // (sw-2)
                 app.UseSwaggerPage();
             }
         }

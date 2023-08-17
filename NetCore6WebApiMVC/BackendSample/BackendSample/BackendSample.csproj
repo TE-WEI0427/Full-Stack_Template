@@ -16,6 +16,9 @@
     <Reference Include="JwtLib">
       <HintPath>..\RunDll\JwtLib\JwtLib.dll</HintPath>
     </Reference>
+    <Reference Include="MailLib">
+      <HintPath>..\RunDll\MailLib\MailLib.dll</HintPath>
+    </Reference>
     <Reference Include="SwaggerLib">
       <HintPath>..\RunDll\SwaggerLib\SwaggerLib.dll</HintPath>
     </Reference>

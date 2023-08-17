@@ -1,5 +1,8 @@
 ﻿namespace JwtLib
 {
+    /// <summary>
+    /// Jwt 參數設定
+    /// </summary>
     public struct JwtSettings
     {
         /// <summary>

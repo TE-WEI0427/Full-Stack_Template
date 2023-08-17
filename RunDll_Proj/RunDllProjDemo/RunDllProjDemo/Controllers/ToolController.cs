@@ -6,12 +6,10 @@ using System.Text.Json.Nodes;
 
 using BaseLib;
 using BasicConfig;
-using JwtLib;
 
 namespace Controllers.API
 {
     [Tags("Tool")]
-    [EnableCors("_demoAllowSpecificOrigins")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class ToolController : ControllerBase

@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+
 using System.Text;
 
 namespace JwtLib
 {
+    /// <summary>
+    /// JWT 服務
+    /// </summary>
     public static class JwtService
     {
         /// <summary>
