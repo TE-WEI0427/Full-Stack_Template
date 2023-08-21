@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -156,6 +157,33 @@ namespace Controllers.API
 
                 result.ResultCode = ResultCode.Success;
                 result.Data = jo;
+            }
+            catch (Exception ex)
+            {
+                result.ResultCode = ResultCode.Exception;
+                result.Message = ex.Message;
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// API 內執行權限驗證 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult CheckAuthV2(string jwtToken)
+        {
+            Result result = new();
+
+            try
+            {
+                var jwtSecurityToken = JwtHelper.VerifyToken(jwtToken);
+
+                UserData userData = JwtHelper.GetTokenDataV2<UserData>(jwtSecurityToken ?? new JwtSecurityToken()) ?? new();
+
+                result.ResultCode = ResultCode.Success;
+                result.Data = userData;
             }
             catch (Exception ex)
             {

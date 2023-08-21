@@ -102,18 +102,20 @@ namespace JwtLib
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.SecretKey));
+
             try
             {
                 tokenHandler.ValidateToken(Token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = (!string.IsNullOrEmpty(JwtSettings.SecretKey)),
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.SecretKey)),
+                    IssuerSigningKey = secretKey,
                     ValidateIssuer = (!string.IsNullOrEmpty(JwtSettings.Issuer)),
                     ValidIssuer = JwtSettings.Issuer,
                     ValidateAudience = (!string.IsNullOrEmpty(JwtSettings.Audience)),
                     ValidAudience = JwtSettings.Audience,
                     // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-                    //ClockSkew = TimeSpan.Zero,
+                    ClockSkew = TimeSpan.Zero,
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
@@ -138,12 +140,42 @@ namespace JwtLib
         /// </summary>
         /// <typeparam name="T">Class 物件</typeparam>
         /// <param name="jwtSecurityToken"></param>
+        /// <returns>必須先進行驗證(VerifyToken)，並回傳物件(包含創建與過期的時間)</returns>
+        public static JObject? GetTokenData<T>(JwtSecurityToken jwtSecurityToken) where T : class
+        {
+            if (jwtSecurityToken == null) return null;
+
+            JObject jo = new();
+
+            PropertyInfo[] infos = typeof(T).GetProperties();
+            foreach (PropertyInfo info in infos)
+            {
+                jo.Add(info.Name, jwtSecurityToken.Claims.First(x => x.Type == info.Name).Value);
+            }
+
+            jo.Add("Issued", jwtSecurityToken.Claims.First(x => x.Type == "Issued").Value);
+            jo.Add("exp", jwtSecurityToken.Claims.First(x => x.Type == ClaimTypes.Expired).Value);
+
+            return jo;
+        }
+
+        /// <summary>
+        /// 取得Token內的資料
+        /// </summary>
+        /// <typeparam name="T">Class 物件</typeparam>
+        /// <param name="jwtSecurityToken"></param>
         /// <returns>必須先進行驗證(VerifyToken)，並回傳Class物件</returns>
         public static T? GetTokenDataV2<T>(JwtSecurityToken jwtSecurityToken) where T : class
         {
             if (jwtSecurityToken == null) return null;
 
             JObject jo = new();
+
+            FieldInfo[] fieldInfos = typeof(T).GetFields();
+            foreach (FieldInfo info in fieldInfos)
+            {
+                jo.Add(info.Name, jwtSecurityToken.Claims.First(x => x.Type == info.Name).Value);
+            }
 
             PropertyInfo[] infos = typeof(T).GetProperties();
             foreach (PropertyInfo info in infos)
