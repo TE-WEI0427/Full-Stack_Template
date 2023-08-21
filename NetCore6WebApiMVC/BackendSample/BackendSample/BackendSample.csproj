@@ -19,6 +19,9 @@
     <Reference Include="MailLib">
       <HintPath>..\RunDll\MailLib\MailLib.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceLib">
+      <HintPath>..\RunDll\ServiceLib\ServiceLib.dll</HintPath>
+    </Reference>
     <Reference Include="SwaggerLib">
       <HintPath>..\RunDll\SwaggerLib\SwaggerLib.dll</HintPath>
     </Reference>

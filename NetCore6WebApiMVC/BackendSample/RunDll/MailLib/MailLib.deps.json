@@ -8,8 +8,13 @@
     ".NETCoreApp,Version=v6.0": {
       "MailLib/1.0.0": {
         "dependencies": {
+          "BouncyCastle.Cryptography": "2.2.1",
           "MailKit": "4.1.0",
-          "MimeKit": "4.1.0"
+          "MimeKit": "4.1.0",
+          "System.Formats.Asn1": "7.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Security.Cryptography.Pkcs": "7.0.3",
+          "System.Text.Encoding.CodePages": "7.0.0"
         },
         "runtime": {
           "MailLib.dll": {}
@@ -38,7 +43,7 @@
         "dependencies": {
           "BouncyCastle.Cryptography": "2.2.1",
           "System.Runtime.CompilerServices.Unsafe": "6.0.0",
-          "System.Security.Cryptography.Pkcs": "7.0.2",
+          "System.Security.Cryptography.Pkcs": "7.0.3",
           "System.Text.Encoding.CodePages": "7.0.0"
         },
         "runtime": {
@@ -57,14 +62,14 @@
         }
       },
       "System.Runtime.CompilerServices.Unsafe/6.0.0": {},
-      "System.Security.Cryptography.Pkcs/7.0.2": {
+      "System.Security.Cryptography.Pkcs/7.0.3": {
         "dependencies": {
           "System.Formats.Asn1": "7.0.0"
         },
         "runtime": {
           "lib/net6.0/System.Security.Cryptography.Pkcs.dll": {
             "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.723.27404"
+            "fileVersion": "7.0.823.31807"
           }
         },
         "runtimeTargets": {
@@ -72,7 +77,7 @@
             "rid": "win",
             "assetType": "runtime",
             "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.723.27404"
+            "fileVersion": "7.0.823.31807"
           }
         }
       },
@@ -138,12 +143,12 @@
       "path": "system.runtime.compilerservices.unsafe/6.0.0",
       "hashPath": "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
     },
-    "System.Security.Cryptography.Pkcs/7.0.2": {
+    "System.Security.Cryptography.Pkcs/7.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xhFNJOcQSWhpiVGLLBQYoxAltQSQVycMkwaX1z7I7oEdT9Wr0HzSM1yeAbfoHaERIYd5s6EpLSOLs2qMchSKlA==",
-      "path": "system.security.cryptography.pkcs/7.0.2",
-      "hashPath": "system.security.cryptography.pkcs.7.0.2.nupkg.sha512"
+      "sha512": "sha512-yhwEHH5Gzl/VoADrXtt5XC95OFoSjNSWLHNutE7GwdOgefZVRvEXRSooSpL8HHm3qmdd9epqzsWg28UJemt22w==",
+      "path": "system.security.cryptography.pkcs/7.0.3",
+      "hashPath": "system.security.cryptography.pkcs.7.0.3.nupkg.sha512"
     },
     "System.Text.Encoding.CodePages/7.0.0": {
       "type": "package",

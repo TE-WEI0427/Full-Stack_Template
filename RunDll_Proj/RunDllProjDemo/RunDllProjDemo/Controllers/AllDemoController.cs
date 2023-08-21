@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Text.Json.Nodes;
 
+using Infrastructure;
 using BasicConfig;
 using BaseLib;
 using JwtLib;
+using Service;
 
 namespace Controllers.API
 {
@@ -14,7 +17,7 @@ namespace Controllers.API
     [EnableCors("_demoAllowSpecificOrigins")]
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class AllDemoController : ControllerBase
+    public class AllDemoController : DefaultController
     {
         public class MDAllDemo
         {
@@ -45,18 +48,11 @@ namespace Controllers.API
         private readonly List<MDAllDemo.MDUserData> UserList = new();
 
         /// <summary>
-        /// 提供目前的存取權 
-        /// </summary>
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        /// <summary>
         /// 建構元
         /// </summary>
         /// <param name="httpContextAccessor"></param>
-        public AllDemoController(IHttpContextAccessor httpContextAccessor)
+        public AllDemoController(IConfiguration configuration, IUserService userService) : base(configuration, userService)
         {
-            _httpContextAccessor = httpContextAccessor;
-
             UserList.Add(new MDAllDemo.MDUserData
             { 
                 SysUserId = 1, Name = "User 1", Role = "admin", Title = "Manager", Gender = 1, Age = 35, 
@@ -134,6 +130,37 @@ namespace Controllers.API
             {
                 result.ResultCode = ResultCode.Failed;
                 result.Message = errStr;
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 權限驗證
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet]
+        public IActionResult CheckAuth()
+        {
+            Result result = new();
+
+            try
+            {
+                JsonObject jo = new()
+                {
+                    { "SysUserId", UserData.SysUserId },
+                    { "Role", UserData.Role },
+                    { "memo", UserData.memo }
+                };
+
+                result.ResultCode = ResultCode.Success;
+                result.Data = jo;
+            }
+            catch (Exception ex)
+            {
+                result.ResultCode = ResultCode.Exception;
+                result.Message = ex.Message;
             }
 
             return Ok(result);

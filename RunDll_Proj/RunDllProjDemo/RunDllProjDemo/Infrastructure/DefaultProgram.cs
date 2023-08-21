@@ -1,9 +1,14 @@
 ﻿using JwtLib;
+using MailLib;
+using ServiceLib;
 using SwaggerLib;
 
 namespace Infrastructure
 {
-    // (J-2) Program
+    /// <summary>
+    /// Api 基底元件
+    /// (J-2) Program
+    /// </summary>
     public static class DefaultProgram
     {
         /// <summary>
@@ -16,6 +21,14 @@ namespace Infrastructure
             JwtSettings.Issuer = builder.Configuration["JwtSettings:Issuer"];
             JwtSettings.Audience = builder.Configuration["JwtSettings:Audience"];
             JwtSettings.SecretKey = builder.Configuration["JwtSettings:SecretKey"];
+
+            // (M-2) mailConfig
+            MailConfig.Host = builder.Configuration["MailConfig:Host"];
+            MailConfig.Port = Convert.ToInt32(builder.Configuration["MailConfig:Port"]);
+            MailConfig.MailAccount = builder.Configuration["MailConfig:MailAccount"];
+            MailConfig.MailPassword = builder.Configuration["MailConfig:MailPassword"];
+            MailConfig.SecureSocketOptions = Convert.ToInt32(builder.Configuration["MailConfig:SecureSocketOptions"]);
+            MailConfig.MailDisplayName = builder.Configuration["MailConfig:MailDisplayName"];
         }
 
         /// <summary>
@@ -24,7 +37,7 @@ namespace Infrastructure
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetService(this WebApplicationBuilder builder)
         {
-            // (sw-1)
+            // (Sw-1)
             builder.AddJwtSwagger();
 
             builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
@@ -61,6 +74,16 @@ namespace Infrastructure
         }
 
         /// <summary>
+        /// Set Scoped
+        /// </summary>
+        /// <param name="builder">指定服務描述項集合的合約</param>
+        public static void SetScoped(this WebApplicationBuilder builder)
+        {
+            // (Ser-1)
+            builder.AddServiceScoped();
+        }
+
+        /// <summary>
         /// app Builder
         /// </summary>
         /// <param name="app">Web 應用程序</param>
@@ -68,7 +91,7 @@ namespace Infrastructure
         {
             if (app.Environment.IsDevelopment())
             {
-                // (sw-2)
+                // (Sw-2)
                 app.UseSwaggerPage();
             }
         }

@@ -1,4 +1,6 @@
 ﻿using JwtLib;
+using MailLib;
+using ServiceLib;
 using SwaggerLib;
 
 namespace Infrastructure
@@ -16,6 +18,14 @@ namespace Infrastructure
             JwtSettings.Issuer = builder.Configuration["JwtSettings:Issuer"];
             JwtSettings.Audience = builder.Configuration["JwtSettings:Audience"];
             JwtSettings.SecretKey = builder.Configuration["JwtSettings:SecretKey"];
+
+            // mailConfig
+            MailConfig.Host = builder.Configuration["MailConfig:Host"];
+            MailConfig.Port = Convert.ToInt32(builder.Configuration["MailConfig:Port"]);
+            MailConfig.MailAccount = builder.Configuration["MailConfig:MailAccount"];
+            MailConfig.MailPassword = builder.Configuration["MailConfig:MailPassword"];
+            MailConfig.SecureSocketOptions = Convert.ToInt32(builder.Configuration["MailConfig:SecureSocketOptions"]);
+            MailConfig.MailDisplayName = builder.Configuration["MailConfig:MailDisplayName"];
         }
 
         /// <summary>
@@ -56,6 +66,16 @@ namespace Infrastructure
                                          //.AllowCredentials();
                                      });
                });
+        }
+
+        /// <summary>
+        /// Set Scoped
+        /// </summary>
+        /// <param name="builder">指定服務描述項集合的合約</param>
+        public static void SetScoped(this WebApplicationBuilder builder)
+        {
+            // (Ser-1)
+            builder.AddServiceScoped();
         }
 
         /// <summary>

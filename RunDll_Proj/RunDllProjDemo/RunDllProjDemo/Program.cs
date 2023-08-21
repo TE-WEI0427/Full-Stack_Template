@@ -5,17 +5,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-#region (J-3) - (J-5) DefaultProgram
+#region (J-3) - (J-5)、(Ser-2) DefaultProgram
 // (J-3) Config
 builder.SetConfig();
 // (J-4) Service
 builder.SetService();
 // (J-5) Cors
 builder.SetCors();
+// (Ser-2) Scoped
+builder.SetScoped();
 #endregion
-
-// (J-6) HttpContextAccessor 
-builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -35,10 +34,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// (J-7) Use Cors
+// (J-6) Use Cors
 app.UseCors();
 
-// (J-8) Use Authentication
+// (J-7) Use Authentication
 app.UseAuthentication();// 先驗證，驗證沒過再嘗試授權
 
 app.UseAuthorization();

@@ -38,6 +38,9 @@ namespace JwtLib
                         RequireExpirationTime = true,
                     };
                 });
+
+            // 通過 IHttpContextAccessor 取得 JWT 內的資料
+            builder.Services.AddHttpContextAccessor();
         }
     }
 }

@@ -12,24 +12,6 @@ namespace Controllers.API
     {
         string errStr = "";
 
-        readonly IConfiguration _configuration;
-
-        readonly MailConfig _mailConfig = new();
-
-        public MailDemoController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-
-            #region mailSendConfig
-            _mailConfig.Host = _configuration.GetValue<string>("MailConfig:Host");
-            _mailConfig.Port = _configuration.GetValue<int>("MailConfig:Port");
-            _mailConfig.MailAccount = _configuration.GetValue<string>("MailConfig:MailAccount");
-            _mailConfig.MailPassword = _configuration.GetValue<string>("MailConfig:MailPassword");
-            _mailConfig.SecureSocketOptions = _configuration.GetValue<int>("MailConfig:SecureSocketOptions");
-            _mailConfig.MailDisplayName = _configuration.GetValue<string>("MailConfig:MailDisplayName");
-            #endregion
-        }
-
         /// <summary>
         /// 電子郵件 寄件測試
         /// </summary>
@@ -43,8 +25,6 @@ namespace Controllers.API
 
             try
             {
-                MailHelper.SendMail sendMail = new(_mailConfig);
-
                 MailDTO mailDTO = new()
                 {
                     To = userEmail,
@@ -57,7 +37,7 @@ namespace Controllers.API
                     "這是測試用郵件。<br><br>"
                 };
 
-                errStr = sendMail.Send(mailDTO);
+                errStr = MailHelper.SendMail.Send(mailDTO);
                 if (errStr != "") throw new Exception(errStr);
 
                 result.ResultCode = ResultCode.Success;

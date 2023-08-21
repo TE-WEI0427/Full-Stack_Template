@@ -9,9 +9,8 @@ builder.Services.AddControllersWithViews();
 builder.SetConfig();
 builder.SetService();
 builder.SetCors();
+builder.SetScoped();
 #endregion
-
-builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

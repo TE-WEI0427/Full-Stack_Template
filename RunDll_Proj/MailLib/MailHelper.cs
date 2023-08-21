@@ -12,28 +12,21 @@ namespace MailLib
         /// </summary>
         public class SendMail
         {
-            readonly MailConfig _config;
-
-            public SendMail(MailConfig mailConfig)
-            {
-                _config = mailConfig;
-            }
-
-            public string Send(MailDTO dTO)
+            public static string Send(MailDTO dTO)
             {
                 string result = "";
 
                 try
                 {
                     var email = new MimeMessage();
-                    email.From.Add(new MailboxAddress(_config.MailDisplayName, _config.MailAccount));
+                    email.From.Add(new MailboxAddress(MailConfig.MailDisplayName, MailConfig.MailAccount));
                     email.To.Add(MailboxAddress.Parse(dTO.To));
                     email.Subject = dTO.Subject;
                     email.Body = new TextPart(TextFormat.Html) { Text = dTO.Body };
 
                     SecureSocketOptions options = new();
 
-                    switch (_config.SecureSocketOptions)
+                    switch (MailConfig.SecureSocketOptions)
                     {
                         case 0:
                             options = SecureSocketOptions.None;
@@ -53,8 +46,8 @@ namespace MailLib
                     }
 
                     using var smtp = new SmtpClient();
-                    smtp.Connect(_config.Host, _config.Port, options);
-                    smtp.Authenticate(_config.MailAccount, _config.MailPassword);
+                    smtp.Connect(MailConfig.Host, MailConfig.Port, options);
+                    smtp.Authenticate(MailConfig.MailAccount, MailConfig.MailPassword);
                     smtp.Send(email);
                     smtp.Disconnect(true);
                 }
