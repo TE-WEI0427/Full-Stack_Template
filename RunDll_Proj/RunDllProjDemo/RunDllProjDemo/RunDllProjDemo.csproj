@@ -12,6 +12,7 @@
     <ProjectReference Include="..\..\JwtLib\JwtLib.csproj" />
     <ProjectReference Include="..\..\MailLib\MailLib.csproj" />
     <ProjectReference Include="..\..\ServiceLib\ServiceLib.csproj" />
+    <ProjectReference Include="..\..\SqlLib\SqlLib.csproj" />
     <ProjectReference Include="..\..\SwaggerLib\SwaggerLib.csproj" />
   </ItemGroup>
 

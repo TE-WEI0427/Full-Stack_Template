@@ -22,6 +22,9 @@
     <Reference Include="ServiceLib">
       <HintPath>..\RunDll\ServiceLib\ServiceLib.dll</HintPath>
     </Reference>
+    <Reference Include="SqlLib">
+      <HintPath>..\RunDll\SqlLib\SqlLib.dll</HintPath>
+    </Reference>
     <Reference Include="SwaggerLib">
       <HintPath>..\RunDll\SwaggerLib\SwaggerLib.dll</HintPath>
     </Reference>

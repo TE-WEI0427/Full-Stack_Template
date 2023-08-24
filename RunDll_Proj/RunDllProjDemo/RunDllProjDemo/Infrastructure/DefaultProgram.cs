@@ -1,13 +1,14 @@
 ﻿using JwtLib;
 using MailLib;
 using ServiceLib;
+using SqlLib.SqlTool;
 using SwaggerLib;
 
 namespace Infrastructure
 {
     /// <summary>
     /// Api 基底元件
-    /// (J-2) Program
+    /// (Jwt-2) Program
     /// </summary>
     public static class DefaultProgram
     {
@@ -22,13 +23,18 @@ namespace Infrastructure
             JwtSettings.Audience = builder.Configuration["JwtSettings:Audience"];
             JwtSettings.SecretKey = builder.Configuration["JwtSettings:SecretKey"];
 
-            // (M-2) mailConfig
+            // (Mail-2) mailConfig
             MailConfig.Host = builder.Configuration["MailConfig:Host"];
             MailConfig.Port = Convert.ToInt32(builder.Configuration["MailConfig:Port"]);
             MailConfig.MailAccount = builder.Configuration["MailConfig:MailAccount"];
             MailConfig.MailPassword = builder.Configuration["MailConfig:MailPassword"];
             MailConfig.SecureSocketOptions = Convert.ToInt32(builder.Configuration["MailConfig:SecureSocketOptions"]);
             MailConfig.MailDisplayName = builder.Configuration["MailConfig:MailDisplayName"];
+
+            // (SQL-2) SqlSetting
+            SqlSetting.StrConnection1 = builder.Configuration["ConnectionStrings:StrConnection1"];
+            SqlSetting.StrConnection2 = builder.Configuration["ConnectionStrings:StrConnection2"];
+            SqlSetting.StrConnection3 = builder.Configuration["ConnectionStrings:StrConnection3"];
         }
 
         /// <summary>
@@ -37,7 +43,7 @@ namespace Infrastructure
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetService(this WebApplicationBuilder builder)
         {
-            // (Sw-1)
+            // (Swag-1)
             builder.AddJwtSwagger();
 
             builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
@@ -79,7 +85,7 @@ namespace Infrastructure
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetScoped(this WebApplicationBuilder builder)
         {
-            // (Ser-1)
+            // (Service-1)
             builder.AddServiceScoped();
         }
 
@@ -91,7 +97,7 @@ namespace Infrastructure
         {
             if (app.Environment.IsDevelopment())
             {
-                // (Sw-2)
+                // (Swag-2)
                 app.UseSwaggerPage();
             }
         }

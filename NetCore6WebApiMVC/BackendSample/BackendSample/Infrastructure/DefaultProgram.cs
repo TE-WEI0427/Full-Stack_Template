@@ -1,6 +1,7 @@
 ﻿using JwtLib;
 using MailLib;
 using ServiceLib;
+using SqlLib.SqlTool;
 using SwaggerLib;
 
 namespace Infrastructure
@@ -19,13 +20,18 @@ namespace Infrastructure
             JwtSettings.Audience = builder.Configuration["JwtSettings:Audience"];
             JwtSettings.SecretKey = builder.Configuration["JwtSettings:SecretKey"];
 
-            // mailConfig
+            // MailConfig
             MailConfig.Host = builder.Configuration["MailConfig:Host"];
             MailConfig.Port = Convert.ToInt32(builder.Configuration["MailConfig:Port"]);
             MailConfig.MailAccount = builder.Configuration["MailConfig:MailAccount"];
             MailConfig.MailPassword = builder.Configuration["MailConfig:MailPassword"];
             MailConfig.SecureSocketOptions = Convert.ToInt32(builder.Configuration["MailConfig:SecureSocketOptions"]);
             MailConfig.MailDisplayName = builder.Configuration["MailConfig:MailDisplayName"];
+
+            // SqlSetting
+            SqlSetting.StrConnection1 = builder.Configuration["ConnectionStrings:StrConnection1"];
+            SqlSetting.StrConnection2 = builder.Configuration["ConnectionStrings:StrConnection2"];
+            SqlSetting.StrConnection3 = builder.Configuration["ConnectionStrings:StrConnection3"];
         }
 
         /// <summary>

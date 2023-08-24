@@ -147,6 +147,12 @@ namespace JwtLib
 
             JObject jo = new();
 
+            FieldInfo[] fieldInfos = typeof(T).GetFields();
+            foreach (FieldInfo info in fieldInfos)
+            {
+                jo.Add(info.Name, jwtSecurityToken.Claims.First(x => x.Type == info.Name).Value);
+            }
+
             PropertyInfo[] infos = typeof(T).GetProperties();
             foreach (PropertyInfo info in infos)
             {
