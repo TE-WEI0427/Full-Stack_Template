@@ -1,0 +1,9 @@
+storePassword=Q3_870427
+keyPassword=Q3_870427
+keyAlias=my_app
+storeFile=../../KeyStore/my_app_release.jks
+
+d_storePassword=Q3_870427
+d_keyPassword=Q3_870427
+d_keyAlias=my_app
+d_storeFile=../../KeyStore/my_app_debug.jks

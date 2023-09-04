@@ -1,0 +1,9 @@
+* my_app_release.jks
+	- 金鑰儲存庫密碼 : Q3_870427
+	- Alias : my_app
+	- 金鑰密碼 : Q3_870427
+
+* my_app_debug.jks
+	- 金鑰儲存庫密碼 : Q3_870427
+	- Alias : my_app
+	- 金鑰密碼 : Q3_870427

@@ -1,0 +1,13 @@
+/ios/Runner/Info.plist Add :
+
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
+
+---------------------------------------------------------
+
+/android/app/src/main/AndroidManifest.xml Add :
+
+    android:usesCleartextTraffic="true"
