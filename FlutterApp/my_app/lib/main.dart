@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/BaseConfig/config_materialapp.dart';
 
 import 'package:my_app/Layout/cls_appbar.dart';
 import 'package:my_app/Layout/cls_bottombar.dart';
@@ -6,9 +7,8 @@ import 'package:my_app/Layout/widget_body.dart';
 import 'package:my_app/Layout/widget_destination.dart';
 import 'package:my_app/Layout/widget_drawer.dart';
 
-import 'package:my_app/HttpService/callapi_1.dart';
-
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -20,9 +20,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
-        useMaterial3: true,
-      ),
+          colorScheme: ThemeDataConfig1.colorScheme,
+          useMaterial3: ThemeDataConfig1.useMaterial3),
       home: const MyHomePage(),
     );
   }
@@ -41,7 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    GetToken();
   }
 
   void onPageChange(int index) {
@@ -63,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         indicatorColor: Colors.amber[800],
         destinations: destinations);
 
-    var pBody = pagebody(currentPageIndex);
+    var pBody = pagebody(context, currentPageIndex);
 
     var drawer = drawer1("AndyHsu", "andyhsu@zhtech.com.tw");
 

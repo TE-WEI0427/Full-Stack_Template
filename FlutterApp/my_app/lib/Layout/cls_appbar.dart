@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/BaseConfig/config_appbar.dart';
 
 class ClsAppBar1 extends AppBar {
   final BuildContext context;
 
   ClsAppBar1(this.context, {super.key})
       : super(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            backgroundColor: AppBarConfig1.backgroundColor(context),
             leading: Builder(
                 builder: (context) => IconButton(
                     onPressed: () => Scaffold.of(context).openDrawer(),
