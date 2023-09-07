@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:sample_app/Widgets/cus_button.dart';
 import 'package:sample_app/HttpService/callapi_1.dart';
 import 'package:sample_app/Pages/page_device_info.dart';
-import 'package:sample_app/Widgets/cus_button.dart';
+import 'package:sample_app/Plugins/plugin_camera.dart';
 
 Widget pagebody(BuildContext context, int currentPageIndex) {
   return <Widget>[
@@ -13,10 +13,13 @@ Widget pagebody(BuildContext context, int currentPageIndex) {
         cusButtons('Get Token', [Colors.blue, Colors.green], 2, () {
           getToken();
         }),
-        cusButtons('plugin : device info plus', [Colors.blue, Colors.green], 2,
+        cusButtons('plugin : Device info plus', [Colors.blue, Colors.green], 2,
             () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const PageDEviceInfo()));
+        }),
+        cusButtons('plugin : Camera', [Colors.blue, Colors.green], 2, () {
+          pushToCamera(context);
         }),
       ]),
     ),

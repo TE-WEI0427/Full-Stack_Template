@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>NSCameraUsageDescription</key>
+	<string>App 需要您的同意, 才能訪問相冊</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App 需要您的同意, 才能訪問麥克風</string>
+
 </dict>
 </plist>

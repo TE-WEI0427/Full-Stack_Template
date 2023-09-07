@@ -1,0 +1,28 @@
+/ios/Runner/Info.plist Add :
+
+<key>NSCameraUsageDescription</key>
+<string>your usage description here</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>your usage description here</string>
+
+---------------------------------------------------------
+
+/android/app/build.gradle Add :
+
+    minSdkVersion 21
+
+---------------------------------------------------------
+
+以下是可能拋出的所有權限錯誤代碼的列表：
+
+CameraAccessDenied：當用戶拒絕相機訪問權限時拋出。
+
+CameraAccessDeniedWithoutPrompt: 目前僅限 iOS。當用戶先前拒絕該權限時拋出。iOS 不允許再次提示警報對話框。用戶必須轉到“設置”>“隱私”>“相機”才能啟用相機訪問。
+
+CameraAccessRestricted: 目前僅限 iOS。當相機訪問受到限制並且用戶無法授予權限（家長控制）時拋出。
+
+AudioAccessDenied：當用戶拒絕音頻訪問權限時拋出。
+
+AudioAccessDeniedWithoutPrompt: 目前僅限 iOS。當用戶先前拒絕該權限時拋出。iOS 不允許再次提示警報對話框。用戶必須轉到“設置”>“隱私”>“麥克風”才能啟用音頻訪問。
+
+AudioAccessRestricted: 目前僅限 iOS。當音頻訪問受到限制並且用戶無法授予權限（家長控制）時拋出。

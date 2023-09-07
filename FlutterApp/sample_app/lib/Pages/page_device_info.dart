@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:sample_app/Plugins/plugin_device_info.dart';
-
 import 'package:sample_app/BaseConfig/config_appbar.dart';
 import 'package:sample_app/BaseConfig/config_materialapp.dart';
 import 'package:sample_app/BaseConfig/config_printlog.dart';
 import 'package:sample_app/BaseConfig/config_delay.dart';
+
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:sample_app/Plugins/plugin_device_info.dart';
 
 class PageDEviceInfo extends StatefulWidget {
   const PageDEviceInfo({Key? key}) : super(key: key);
