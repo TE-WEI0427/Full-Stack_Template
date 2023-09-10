@@ -3,6 +3,7 @@ using MailLib;
 using ServiceLib;
 using SqlLib.SqlTool;
 using SwaggerLib;
+using System.Reflection;
 
 namespace Infrastructure
 {
@@ -41,6 +42,7 @@ namespace Infrastructure
         public static void SetService(this WebApplicationBuilder builder)
         {
             builder.AddJwtSwagger();
+            builder.AddSwaggerDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
             builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
         }
 
@@ -93,6 +95,7 @@ namespace Infrastructure
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwaggerPage();
+                app.UseSwaggerPageWithDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
             }
         }
     }

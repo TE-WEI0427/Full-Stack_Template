@@ -51,7 +51,8 @@ namespace Controllers.API
         /// <summary>
         /// 建構元
         /// </summary>
-        /// <param name="httpContextAccessor"></param>
+        /// <param name="configuration"></param>
+        /// <param name="userService"></param>
         public AllDemoController(IConfiguration configuration, IUserService userService) : base(configuration, userService)
         {
             UserList.Add(new MDAllDemo.MDUserData

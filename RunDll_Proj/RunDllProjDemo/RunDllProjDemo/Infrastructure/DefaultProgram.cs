@@ -3,6 +3,8 @@ using MailLib;
 using ServiceLib;
 using SqlLib.SqlTool;
 using SwaggerLib;
+using Infrastructure.ActionFilter;
+using System.Reflection;
 
 namespace Infrastructure
 {
@@ -45,6 +47,7 @@ namespace Infrastructure
         {
             // (Swag-1)
             builder.AddJwtSwagger();
+            builder.AddSwaggerDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
 
             builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
         }
@@ -87,6 +90,8 @@ namespace Infrastructure
         {
             // (Service-1)
             builder.AddServiceScoped();
+
+            builder.Services.AddScoped<ApiActionFilter>();
         }
 
         /// <summary>
@@ -98,7 +103,8 @@ namespace Infrastructure
             if (app.Environment.IsDevelopment())
             {
                 // (Swag-2)
-                app.UseSwaggerPage();
+                //app.UseSwaggerPage();
+                app.UseSwaggerPageWithDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
             }
         }
     }
