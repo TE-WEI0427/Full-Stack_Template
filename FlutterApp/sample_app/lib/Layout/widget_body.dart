@@ -3,7 +3,16 @@ import 'package:sample_app/Widgets/cus_button.dart';
 import 'package:sample_app/HttpService/callapi_1.dart';
 import 'package:sample_app/Pages/page_device_info.dart';
 import 'package:sample_app/Plugins/plugin_camera.dart';
+import 'package:sample_app/Pages/page_image_picker.dart';
 
+/// 頁面內容元件
+///
+/// 搭配 NavigationBar 使用
+///
+/// ---------------------------------
+/// 參數說明
+///
+/// currentPageIndex : NavigationBar 的  selectedIndex
 Widget pagebody(BuildContext context, int currentPageIndex) {
   return <Widget>[
     Container(
@@ -20,6 +29,10 @@ Widget pagebody(BuildContext context, int currentPageIndex) {
         }),
         cusButtons('plugin : Camera', [Colors.blue, Colors.green], 2, () {
           pushToCamera(context);
+        }),
+        cusButtons('plugin : Image picker', [Colors.blue, Colors.green], 2, () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const PageImagePicker()));
         }),
       ]),
     ),

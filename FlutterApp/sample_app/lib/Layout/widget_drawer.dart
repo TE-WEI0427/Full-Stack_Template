@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 
+/// drawer 元件
+///
+/// 包含一個 UserAccountsDrawerHeader
+///
+/// ------------------------------------
+/// 參數說明
+///
+/// accountName : 帳戶名稱
+///
+/// accountEmail : 帳戶電子郵件
 Widget drawer1(String accountName, String accountEmail) {
   return Drawer(
     child: ListView(

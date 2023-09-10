@@ -1,9 +1,9 @@
 /ios/Runner/Info.plist Add :
 
-<key>NSCameraUsageDescription</key>
-<string>your usage description here</string>
-<key>NSMicrophoneUsageDescription</key>
-<string>your usage description here</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App 需要您的同意, 才能訪問相機</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App 需要您的同意, 才能訪問麥克風</string>
 
 ---------------------------------------------------------
 

@@ -25,7 +25,7 @@ class _PageDEviceInfoState extends State<PageDEviceInfo> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: AppBarConfig1.backgroundColor(context),
-          leading: AppBarConfig1.backButton(context),
+          leading: AppBarConfig1.wBackButton(context),
           title: Text(getAppBarTitle()),
           elevation: 4,
         ),

@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:sample_app/BaseConfig/config_appbar.dart';
+import 'package:sample_app/BaseConfig/config_materialapp.dart';
+
+class PageImagePicker extends StatefulWidget {
+  const PageImagePicker({Key? key}) : super(key: key);
+
+  @override
+  State<PageImagePicker> createState() => _PageImagePickerState();
+}
+
+class _PageImagePickerState extends State<PageImagePicker> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the controller when the widget is disposed.
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        theme: ThemeData(
+            colorScheme: ThemeDataConfig1.colorScheme,
+            useMaterial3: ThemeDataConfig1.useMaterial3),
+        home: Scaffold(
+            appBar: AppBar(
+              backgroundColor: AppBarConfig1.backgroundColor(context),
+              leading: AppBarConfig1.backButton(context),
+              title: const Text("Camera sample"),
+            ),
+            body: null));
+  }
+}

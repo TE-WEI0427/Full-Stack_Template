@@ -1,0 +1,18 @@
+/ios/Runner/Info.plist Add :
+
+	<key>NSCameraUsageDescription</key>
+	<string>App 需要您的同意, 才能訪問相機</string>
+	<key> NSPhotoLibraryUsageDescription </key>
+	<string>App 需要您的同意, 才能訪問相冊</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App 需要您的同意, 才能訪問麥克風</string>
+
+---------------------------------------------------------
+
+android 無需配置 - 該插件應該開箱即用
+
+不再需要將其 android:requestLegacyExternalStorage="true" 
+作為屬性添加到<application>AndroidManifest.xml 中的標記，
+因為 image_picker已更新為使用範圍存儲。
+
+---------------------------------------------------------

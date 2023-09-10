@@ -1,0 +1,15 @@
+* 使用Expanded或Flexible都可以 防止Row中的東西Overflow
+
+* 使用SingleChildScrollView 可以 防止Column中的東西Overflow
+
+* initState 不能使用 async，但區塊內可以執行 異步方法
+
+* StreamController 可以局部更新小部件
+
+* FutureBuilder 可實現 UI loading 的感覺
+
+* GridView 可限制單行可容納的 部件數量，簡單來說是 Row + Column + SingleChildScrollView 的組成
+
+* Column 子級之間的間距 : https://stackoverflow.com/questions/52774921/space-between-columns-children-in-flutter
+
+* ListView in a SimpleDialog : https://stackoverflow.com/questions/50095763/flutter-listview-in-a-simpledialog
