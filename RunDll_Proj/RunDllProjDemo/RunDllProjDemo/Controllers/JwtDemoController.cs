@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Infrastructure.ActionFilter;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Controllers.API
 {
@@ -28,7 +26,6 @@ namespace Controllers.API
     [Tags("JwtDemo")]
     [EnableCors("_demoAllowSpecificOrigins")]
     [Route("api/[controller]/[action]")]
-    [ServiceFilter(typeof(ApiActionFilter))]
     [ApiController]
     public class JwtDemoController : ControllerBase
     {
@@ -56,16 +53,6 @@ namespace Controllers.API
         public ActionResult GetToken(MDJwtDemo.MDUserData model)
         {
             string token = JwtLib.JwtHelper.CreateToken(model, 1);
-
-            try
-            {
-                throw new Exception("test");
-            }
-            catch (Exception ex)
-            {
-                if(!string.IsNullOrEmpty(ex.Message))
-                    throw new Exception("Testing custom exception filter.");
-            }
 
             return Ok(token);
         }

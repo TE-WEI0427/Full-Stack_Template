@@ -1,10 +1,11 @@
-﻿using JwtLib;
+﻿using System.Reflection;
+
+using Infrastructure.ApiFilter;
+using JwtLib;
 using MailLib;
 using ServiceLib;
 using SqlLib.SqlTool;
 using SwaggerLib;
-using Infrastructure.ActionFilter;
-using System.Reflection;
 
 namespace Infrastructure
 {
@@ -91,7 +92,8 @@ namespace Infrastructure
             // (Service-1)
             builder.AddServiceScoped();
 
-            builder.Services.AddScoped<ApiActionFilter>();
+            // (Service-Filter-2)
+            builder.Services.AddScoped<ApiActionFilterAttribute>();
         }
 
         /// <summary>

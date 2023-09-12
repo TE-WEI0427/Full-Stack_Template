@@ -1,4 +1,8 @@
-﻿namespace BasicConfig
+﻿using Newtonsoft.Json;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+
+namespace BasicConfig
 {
     /// <summary>
     /// App 呼叫 API 開始/結束
@@ -93,6 +97,25 @@
         {
             this.ResultCode = ResultCode;
             this.Message = message;
+        }
+
+        /// <summary>
+        /// Data to Json
+        /// </summary>
+        /// <returns></returns>
+        public string JsonData()
+        {
+            return (
+                        this.Data.GetType().Name != "JsonObject"
+                        ? JsonConvert.SerializeObject(this.Data)
+                        : System.Text.Json.JsonSerializer.Serialize(
+                            this.Data,
+                            new JsonSerializerOptions
+                            {
+                                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                            }
+                          )
+                  );
         }
     }
 }

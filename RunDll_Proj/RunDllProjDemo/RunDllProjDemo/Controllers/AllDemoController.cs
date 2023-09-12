@@ -11,12 +11,14 @@ using BasicConfig;
 using BaseLib;
 using JwtLib;
 using Service;
+using Infrastructure.ApiFilter;
 
 namespace Controllers.API
 {
     [Tags("AllDemo")]
     [EnableCors("_demoAllowSpecificOrigins")]
     [Route("api/[controller]/[action]")]
+    [ServiceFilter(typeof(ApiActionFilterAttribute))] // (Service-Filter-3)
     [ApiController]
     public class AllDemoController : DefaultController
     {

@@ -1,4 +1,5 @@
-﻿using JwtLib;
+﻿using Infrastructure.ApiFilter;
+using JwtLib;
 using MailLib;
 using ServiceLib;
 using SqlLib.SqlTool;
@@ -82,8 +83,8 @@ namespace Infrastructure
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetScoped(this WebApplicationBuilder builder)
         {
-            // (Ser-1)
             builder.AddServiceScoped();
+            builder.Services.AddScoped<ApiActionFilterAttribute>();
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace Infrastructure
         {
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwaggerPage();
+                //app.UseSwaggerPage();
                 app.UseSwaggerPageWithDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
             }
         }

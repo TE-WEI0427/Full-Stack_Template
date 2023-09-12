@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BaseLib
+﻿namespace BaseLib
 {
     public class CommonUtil
     {
