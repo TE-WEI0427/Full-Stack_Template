@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:sample_app/Widgets/cus_button.dart';
 import 'package:sample_app/HttpService/callapi_1.dart';
 import 'package:sample_app/Pages/page_device_info.dart';
 import 'package:sample_app/Plugins/plugin_camera.dart';
 import 'package:sample_app/Pages/page_image_picker.dart';
+import 'package:sample_app/Pages/page_dialog.dart';
 
 /// 頁面內容元件
 ///
@@ -33,6 +35,10 @@ Widget pagebody(BuildContext context, int currentPageIndex) {
         cusButtons('plugin : Image picker', [Colors.blue, Colors.green], 2, () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const PageImagePicker()));
+        }),
+        cusButtons('ShowDialog', [Colors.blue, Colors.green], 2, () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const PageDialog()));
         }),
       ]),
     ),

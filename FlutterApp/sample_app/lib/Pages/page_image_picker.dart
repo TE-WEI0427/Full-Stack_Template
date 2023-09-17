@@ -56,7 +56,12 @@ class _PageImagePickerState extends State<PageImagePicker> {
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [imgContainer(), btnUploadImage()],
+                    children: [
+                      imgContainer(),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.01),
+                      btnUploadImage()
+                    ],
                   ),
                 ))));
   }

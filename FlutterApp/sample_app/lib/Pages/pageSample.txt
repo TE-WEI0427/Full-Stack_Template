@@ -30,7 +30,7 @@ class _PageImagePickerState extends State<PageImagePicker> {
         home: Scaffold(
             appBar: AppBar(
               backgroundColor: AppBarConfig1.backgroundColor(context),
-              leading: AppBarConfig1.backButton(context),
+              leading: AppBarConfig1.wBackButton(context),
               title: const Text("Camera sample"),
             ),
             body: null));

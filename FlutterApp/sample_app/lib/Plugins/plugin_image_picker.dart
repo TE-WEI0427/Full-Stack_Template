@@ -11,7 +11,7 @@ import 'package:sample_app/BaseConfig/config_printlog.dart';
 ///
 /// gallery : 讀取相簿
 Future<String> getPicturePath(String type) async {
-  final ImagePicker _picker = ImagePicker();
+  final ImagePicker picker = ImagePicker();
 
   String imgPath = "";
 
@@ -32,7 +32,7 @@ Future<String> getPicturePath(String type) async {
       break;
   }
 
-  XFile? image = await _picker.pickImage(source: imgSource);
+  XFile? image = await picker.pickImage(source: imgSource);
 
   if (image != null) {
     imgPath = image.path;
