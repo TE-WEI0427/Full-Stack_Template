@@ -6,6 +6,7 @@ import 'package:sample_app/Pages/page_device_info.dart';
 import 'package:sample_app/Plugins/plugin_camera.dart';
 import 'package:sample_app/Pages/page_image_picker.dart';
 import 'package:sample_app/Pages/page_dialog.dart';
+import 'package:sample_app/Pages/page_app_setting.dart';
 
 /// 頁面內容元件
 ///
@@ -36,9 +37,14 @@ Widget pagebody(BuildContext context, int currentPageIndex) {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const PageImagePicker()));
         }),
-        cusButtons('ShowDialog', [Colors.blue, Colors.green], 2, () {
+        cusButtons('plugin : rflutter_alert', [Colors.blue, Colors.green], 2,
+            () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const PageDialog()));
+        }),
+        cusButtons('plugin : app_setting', [Colors.blue, Colors.green], 2, () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const PageAppSetting()));
         }),
       ]),
     ),

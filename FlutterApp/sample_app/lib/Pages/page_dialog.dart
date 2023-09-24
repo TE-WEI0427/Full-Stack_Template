@@ -38,7 +38,7 @@ class _PageDialogState extends State<PageDialog> {
             appBar: AppBar(
               backgroundColor: AppBarConfig1.backgroundColor(context),
               leading: AppBarConfig1.wBackButton(context),
-              title: const Text("Camera sample"),
+              title: const Text("Dialog sample"),
             ),
             body: SingleChildScrollView(
                 child: Container(

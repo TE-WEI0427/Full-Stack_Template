@@ -20,7 +20,7 @@ version: 1.0.1
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
-  flutter: "3.13.1"
+  flutter: "3.13.4"
   
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -41,6 +41,7 @@ dependencies:
   camera: ^0.10.5+4
   image_picker: ^1.0.4
   rflutter_alert: ^2.0.7
+  app_settings: ^5.0.0
 
 dev_dependencies:
   flutter_test:

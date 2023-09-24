@@ -1,0 +1,4 @@
+/ios/Runner/podfile Add :
+
+    target 'Runner' do
+    use_frameworks!
