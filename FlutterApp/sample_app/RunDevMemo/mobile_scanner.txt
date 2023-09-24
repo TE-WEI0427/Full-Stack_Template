@@ -1,0 +1,11 @@
+when build apk throw this error:
+
+    [!] Your project requires a newer version of the Kotlin Gradle plugin.                           
+    Find the latest version on https://kotlinlang.org/docs/releases.html#release-details, then update
+    D:\AndyWorkspace\TMP\flutterPluginTest\sample_app\android\build.gradle:                          
+    ext.kotlin_version = '<latest-version>'    
+
+
+fix this :       
+
+    \android\build.gradle add ext.kotlin_version = '<latest-version>'

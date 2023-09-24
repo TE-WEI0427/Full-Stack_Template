@@ -7,6 +7,7 @@ import 'package:sample_app/Plugins/plugin_camera.dart';
 import 'package:sample_app/Pages/page_image_picker.dart';
 import 'package:sample_app/Pages/page_dialog.dart';
 import 'package:sample_app/Pages/page_app_setting.dart';
+import 'package:sample_app/Pages/page_mobile_scanner.dart';
 
 /// 頁面內容元件
 ///
@@ -45,6 +46,13 @@ Widget pagebody(BuildContext context, int currentPageIndex) {
         cusButtons('plugin : app_setting', [Colors.blue, Colors.green], 2, () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const PageAppSetting()));
+        }),
+        cusButtons('plugin : mobile_scanner', [Colors.blue, Colors.green], 2,
+            () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const PageMobileScanner()));
         }),
       ]),
     ),
