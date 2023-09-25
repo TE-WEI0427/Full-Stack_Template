@@ -43,6 +43,7 @@ dependencies:
   rflutter_alert: ^2.0.7
   app_settings: ^5.0.0
   mobile_scanner: ^3.4.1
+  permission_handler: ^11.0.0
 
 dev_dependencies:
   flutter_test:
