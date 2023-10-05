@@ -51,8 +51,10 @@ class _PageDEviceInfoState extends State<PageDEviceInfo> {
 }
 
 Future<Widget> getDEviceInfo() async {
+  // (1) device
   final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
+  // (2) device
   Map<String, dynamic> deviceData = await initPlatformState(deviceInfoPlugin);
 
   return genDeviceInfoListView(deviceData);

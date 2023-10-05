@@ -79,47 +79,36 @@ class _PageQuickScannState extends State<PageQuickScann> {
   Widget bodyContainer() {
     return SafeArea(
         child: Column(
-      children: [
-        barCodeScannerContainer(),
-        const Expanded(
-          child: Center(
-            child: Text(
-              'Your scanned barcode will appear here!',
-            ),
-          ),
-        )
-      ],
+      children: [barCodeScannerContainer(), const TabWidget()],
     ));
   }
 
   /// 條碼掃描區塊
   Widget barCodeScannerContainer() {
-    return Expanded(
-      flex: 2,
-      child: ColoredBox(
-        color: Colors.grey,
-        child: Stack(
-          children: [
-            wScanControl(),
-            Align(
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.45,
+      color: Colors.grey,
+      child: Stack(
+        children: [
+          wScanControl(),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
               alignment: Alignment.bottomCenter,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                height: 100,
-                color: Colors.black.withOpacity(0.4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    btnTorchSwitch(),
-                    btnCameraSwitch(),
-                    wShowText(),
-                    btnCameraFacingSwitch(),
-                  ],
-                ),
+              height: MediaQuery.of(context).size.height * 0.075,
+              color: Colors.black.withOpacity(0.4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  btnTorchSwitch(),
+                  btnCameraSwitch(),
+                  wShowText(),
+                  btnCameraFacingSwitch(),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -209,7 +198,7 @@ class _PageQuickScannState extends State<PageQuickScann> {
         // 如果為 null，則預設為黑色 [ColoredBox]，並帶有居中的白色 [Icons.error] 圖示。
         return wfixError(error);
       },
-      fit: BoxFit.contain,
+      fit: BoxFit.none,
       onDetect: (barcode) {
         setState(() {
           this.barcode = barcode;
@@ -236,5 +225,130 @@ class _PageQuickScannState extends State<PageQuickScann> {
         break;
     }
     return Text(errorMessage);
+  }
+}
+
+/// TabWidget
+class TabWidget extends StatefulWidget {
+  const TabWidget({Key? key}) : super(key: key);
+
+  @override
+  State<TabWidget> createState() => _TabWidgetState();
+}
+
+class _TabWidgetState extends State<TabWidget>
+    with SingleTickerProviderStateMixin {
+  late TabController _controller;
+
+  final noScanItems = [
+    '0123456789',
+    '0123456789',
+    '0123456789',
+    '0123456789',
+    '0123456789',
+    '0123456789',
+    '0123456789',
+    '0123456789',
+    '0123456789',
+  ];
+
+  final scanItems = [
+    '9876543210',
+    '9876543210',
+    '9876543210',
+    '9876543210',
+    '9876543210',
+    '9876543210',
+    '9876543210',
+    '9876543210',
+    '9876543210',
+  ];
+
+  final scanNoMatchItems = [
+    '1928374650',
+    '1928374650',
+    '1928374650',
+    '1928374650',
+    '1928374650',
+    '1928374650',
+    '1928374650',
+    '1928374650',
+    '1928374650',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.05,
+          decoration: BoxDecoration(color: Theme.of(context).indicatorColor),
+          child: TabBar(
+            controller: _controller,
+            tabs: const [
+              Tab(
+                text: '未掃描條碼',
+              ),
+              Tab(
+                text: '已掃描條碼',
+              ),
+              Tab(
+                text: '未匹配條碼',
+              )
+            ],
+          ),
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.375,
+          child: TabBarView(
+            controller: _controller,
+            children: <Widget>[
+              ListView.builder(
+                  itemCount: noScanItems.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: const BoxDecoration(
+                        border: Border(bottom: BorderSide()),
+                      ),
+                      child: ListTile(
+                        title: Text(noScanItems[index]),
+                      ),
+                    );
+                  }),
+              ListView.builder(
+                  itemCount: scanItems.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: const BoxDecoration(
+                        border: Border(bottom: BorderSide()),
+                      ),
+                      child: ListTile(
+                        title: Text(scanItems[index]),
+                      ),
+                    );
+                  }),
+              ListView.builder(
+                  itemCount: scanNoMatchItems.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: const BoxDecoration(
+                        border: Border(bottom: BorderSide()),
+                      ),
+                      child: ListTile(
+                        title: Text(scanNoMatchItems[index]),
+                      ),
+                    );
+                  }),
+            ],
+          ),
+        )
+      ],
+    );
   }
 }
