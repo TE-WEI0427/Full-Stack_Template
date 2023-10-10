@@ -10,6 +10,7 @@ import 'package:sample_app/Pages/page_app_setting.dart';
 import 'package:sample_app/Pages/page_mobile_scanner.dart';
 import 'package:sample_app/Pages/page_premission_handler.dart';
 import 'package:sample_app/Pages/page_quick_scan.dart';
+import 'package:sample_app/Pages/page_path_provider.dart';
 
 /// 頁面內容元件
 ///
@@ -66,6 +67,13 @@ Widget pagebody(BuildContext context, int currentPageIndex) {
               context,
               MaterialPageRoute(
                   builder: (context) => const PagePremissionHandler()));
+        }),
+        cusButtons('plugin : path_provider', [Colors.blue, Colors.green], 2,
+            () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const PagePathProvider()));
         }),
       ]),
     ),
