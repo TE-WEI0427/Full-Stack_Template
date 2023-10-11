@@ -12,6 +12,20 @@ namespace JwtLib
     public static class JwtService
     {
         /// <summary>
+        /// 執行 Jwt 所有初始設定
+        /// </summary>
+        /// <param name="builder">指定服務描述項集合的合約</param>
+        public static void JwtBuilderInit(this WebApplicationBuilder builder)
+        {
+            // JwtSettings
+            JwtSettings.Issuer = builder.Configuration["JwtSettings:Issuer"];
+            JwtSettings.Audience = builder.Configuration["JwtSettings:Audience"];
+            JwtSettings.SecretKey = builder.Configuration["JwtSettings:SecretKey"];
+
+            builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
+        }
+
+        /// <summary>
         /// 加入 JWT 驗證服務
         /// </summary>
         /// <param name="builder">指定服務描述項集合的合約</param>

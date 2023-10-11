@@ -8,9 +8,18 @@ using System.Reflection;
 
 namespace Infrastructure
 {
-    // (2) Program
+    // Program
     public static class DefaultProgram
     {
+        public static void Init(this WebApplicationBuilder builder)
+        {
+            // (Jwt-3、4) 3與4一起設定的方式
+            builder.JwtBuilderInit();
+
+            // (Swag-1) 設定方式 1
+            builder.SwaggerBuilderInit(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
+        }
+
         /// <summary>
         /// set config
         /// </summary>
@@ -18,9 +27,9 @@ namespace Infrastructure
         public static void SetConfig(this WebApplicationBuilder builder)
         {
             // JwtSettings
-            JwtSettings.Issuer = builder.Configuration["JwtSettings:Issuer"];
-            JwtSettings.Audience = builder.Configuration["JwtSettings:Audience"];
-            JwtSettings.SecretKey = builder.Configuration["JwtSettings:SecretKey"];
+            //JwtSettings.Issuer = builder.Configuration["JwtSettings:Issuer"];
+            //JwtSettings.Audience = builder.Configuration["JwtSettings:Audience"];
+            //JwtSettings.SecretKey = builder.Configuration["JwtSettings:SecretKey"];
 
             // MailConfig
             MailConfig.Host = builder.Configuration["MailConfig:Host"];
@@ -42,9 +51,9 @@ namespace Infrastructure
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetService(this WebApplicationBuilder builder)
         {
-            builder.AddJwtSwagger();
-            builder.AddSwaggerDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
-            builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
+            //builder.AddJwtSwagger();
+            //builder.AddSwaggerDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
+            //builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
         }
 
         /// <summary>
@@ -52,7 +61,8 @@ namespace Infrastructure
         /// </summary>
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetCors(this WebApplicationBuilder builder)
-        {
+        {// 要設定 Cors 才能使用 JWT
+
             string DemoAllowSpecificOrigins = "_demoAllowSpecificOrigins";
 
             builder.Services
@@ -93,10 +103,16 @@ namespace Infrastructure
         /// <param name="app">Web 應用程序</param>
         public static void AppBuilder(this WebApplication app)
         {
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    //app.UseSwaggerPage();
+            //    app.UseSwaggerPageWithDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
+            //}
+
             if (app.Environment.IsDevelopment())
             {
-                //app.UseSwaggerPage();
-                app.UseSwaggerPageWithDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
+                //app.SwaggerAppInit();
+                app.SwaggerAppInit(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
             }
         }
     }

@@ -238,7 +238,7 @@ namespace RunDllProjDemo.Controllers
         }
 
         /// <summary>
-        /// SQL 更新資料
+        /// SQL 刪除資料
         /// </summary>
         /// <returns></returns>
         [HttpDelete]

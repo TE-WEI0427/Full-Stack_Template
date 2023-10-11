@@ -6,8 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 #region Infrastructure
+builder.Init();
 builder.SetConfig();
-builder.SetService();
+//builder.SetService();
 builder.SetCors();
 builder.SetScoped();
 #endregion

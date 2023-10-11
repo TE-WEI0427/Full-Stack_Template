@@ -6,10 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 #region (J-3) - (J-5)¡B(Ser-2) DefaultProgram
-// (Jwt-3) Config
+// Init
+builder.Init();
+// Config
 builder.SetConfig();
-// (Jwt-4) Service
-builder.SetService();
+// Service
+//builder.SetService();
 // (Jwt-5) Cors
 builder.SetCors();
 // (Service-2) Scoped
