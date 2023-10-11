@@ -1,0 +1,30 @@
+gradle.properties add :
+
+    android.useAndroidX=true
+    android.enableJetifier=true
+
+-------------------------------------------------------------------------------------------------------
+
+android/app/build.gradle add :
+
+    android {
+        compileSdkVersion 33
+        ...
+    }
+
+-------------------------------------------------------------------------------------------------------
+
+AndroidManifest.xml add :
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+-------------------------------------------------------------------------------------------------------
+
+iOS Info.plist add :
+
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app needs access to location when in the background.</string>
