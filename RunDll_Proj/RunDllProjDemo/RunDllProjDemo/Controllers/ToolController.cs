@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 using System.Text.Json.Nodes;
 
@@ -9,6 +10,7 @@ using BasicConfig;
 namespace Controllers.API
 {
     [Tags("Tool")]
+    [EnableCors("_demoAllowSpecificOrigins")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class ToolController : ControllerBase

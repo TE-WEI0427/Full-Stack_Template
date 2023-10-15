@@ -5,10 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-#region Infrastructure
+#region DefaultProgram
 builder.Init();
 builder.SetConfig();
-//builder.SetService();
 builder.SetCors();
 builder.SetScoped();
 #endregion
@@ -23,7 +22,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// from Infrastructure
+// from DefaultProgram
 app.AppBuilder();
 
 //app.UseHttpsRedirection();
@@ -33,7 +32,7 @@ app.UseRouting();
 
 app.UseCors();
 
-app.UseAuthentication();// 先驗證，驗證沒過再嘗試授權
+app.UseAuthentication(); // 先驗證，驗證沒過再嘗試授權
 
 app.UseAuthorization();
 

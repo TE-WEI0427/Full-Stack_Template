@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 
-using Infrastructure.ApiFilter;
 using JwtLib;
 using MailLib;
 using ServiceLib;
 using SqlLib.SqlTool;
+using Infrastructure.ApiFilter;
 using SwaggerLib;
 
 namespace Infrastructure
@@ -15,6 +15,10 @@ namespace Infrastructure
     /// </summary>
     public static class DefaultProgram
     {
+        /// <summary>
+        /// 初始設定
+        /// </summary>
+        /// <param name="builder">指定服務描述項集合的合約</param>
         public static void Init(this WebApplicationBuilder builder)
         {
             // (Jwt-3、4) 3與4一起設定的方式
@@ -103,7 +107,7 @@ namespace Infrastructure
             // (Service-1)
             builder.AddServiceScoped();
 
-            // (Service-Filter-2)
+            // (Service-Filter-2) Api use [ServiceFilter(typeof(ApiActionFilterAttribute))]
             builder.Services.AddScoped<ApiActionFilterAttribute>();
         }
 

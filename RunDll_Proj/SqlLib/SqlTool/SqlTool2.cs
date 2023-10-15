@@ -313,7 +313,7 @@ namespace SqlCls
             return ExecuteBatchUpdate(cn, strSql, updateTable, 60, arrParameters);
         }
 
-        public static string ExecuteBatchActData(SqlConnection cn, string strSql_Insert, string strSql_Update, string strSql_DeleteSql, DataTable actTable, int timeout, SqlParameter[] param_Insert, SqlParameter[] param_Update, SqlParameter[] param_Delete)
+        public static string ExecuteBatchActData(SqlConnection cn, string? strSql_Insert, string? strSql_Update, string? strSql_DeleteSql, DataTable actTable, int timeout, SqlParameter[]? param_Insert, SqlParameter[]? param_Update, SqlParameter[]? param_Delete)
         {
             try
             {
@@ -352,7 +352,7 @@ namespace SqlCls
             }
         }
 
-        public static string ExecuteBatchActData(SqlConnection cn, string strSql_Insert, string strSql_Update, string strSql_DeleteSql, DataTable actTable, SqlParameter[] param_Insert, SqlParameter[] param_Update, SqlParameter[] param_Delete)
+        public static string ExecuteBatchActData(SqlConnection cn, string? strSql_Insert, string? strSql_Update, string? strSql_DeleteSql, DataTable actTable, SqlParameter[]? param_Insert, SqlParameter[]? param_Update, SqlParameter[]? param_Delete)
         {
             return ExecuteBatchActData(cn, strSql_Insert, strSql_Update, strSql_DeleteSql, actTable, 60, param_Insert, param_Update, param_Delete);
         }

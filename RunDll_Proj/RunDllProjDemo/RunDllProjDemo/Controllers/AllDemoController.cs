@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Text.Json.Nodes;
@@ -11,15 +10,11 @@ using BasicConfig;
 using BaseLib;
 using JwtLib;
 using Service;
-using Infrastructure.ApiFilter;
+using Newtonsoft.Json.Linq;
 
 namespace Controllers.API
 {
     [Tags("AllDemo")]
-    [EnableCors("_demoAllowSpecificOrigins")]
-    [Route("api/[controller]/[action]")]
-    [ServiceFilter(typeof(ApiActionFilterAttribute))] // (Service-Filter-3)
-    [ApiController]
     public class AllDemoController : DefaultController
     {
         public class MDAllDemo
@@ -105,7 +100,7 @@ namespace Controllers.API
 
                 if (isVerified)
                 {
-                    UserData userData = new()
+                    DefalutUserData userData = new()
                     {
                         SysUserId = user.SysUserId,
                         Role = user.Role
@@ -171,9 +166,11 @@ namespace Controllers.API
         }
 
         /// <summary>
-        /// API 內執行權限驗證 
+        /// JWT 作為參數 執行權限驗證 
         /// </summary>
+        /// <param name="jwtToken">JWT</param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult CheckAuthV2(string jwtToken)
         {
@@ -183,7 +180,8 @@ namespace Controllers.API
             {
                 var jwtSecurityToken = JwtHelper.VerifyToken(jwtToken);
 
-                UserData userData = JwtHelper.GetTokenDataV2<UserData>(jwtSecurityToken ?? new JwtSecurityToken()) ?? new();
+                //JObject job = JwtHelper.GetTokenData<DefalutUserData>(jwtSecurityToken ?? new JwtSecurityToken()) ?? new();
+                DefalutUserData userData = JwtHelper.GetTokenDataV2<DefalutUserData>(jwtSecurityToken ?? new JwtSecurityToken()) ?? new();
 
                 result.ResultCode = ResultCode.Success;
                 result.Data = userData;

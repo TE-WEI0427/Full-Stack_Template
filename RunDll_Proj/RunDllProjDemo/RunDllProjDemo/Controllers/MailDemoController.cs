@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
 using BasicConfig;
 using MailLib;
@@ -6,6 +7,7 @@ using MailLib;
 namespace Controllers.API
 {
     [Tags("MailDemo")]
+    [EnableCors("_demoAllowSpecificOrigins")]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class MailDemoController : ControllerBase

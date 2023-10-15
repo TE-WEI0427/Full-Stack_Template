@@ -5,7 +5,8 @@
         /// <summary>
         /// 寫 log
         /// </summary>
-        /// <param name="filePath">資料夾路徑</param>
+        /// <param name="filePath">資料夾路徑(不應包含要建立的資料夾)</param>
+        /// <param name="fileName">資料夾名稱</param>
         /// <param name="logStr">log字串</param>
         /// <returns></returns>
         public static bool WriteLog(string filePath, string fileName, string logStr)

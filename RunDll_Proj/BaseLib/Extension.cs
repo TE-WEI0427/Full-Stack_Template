@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text.Json.Nodes;
 
 namespace BaseLib
@@ -101,6 +101,76 @@ namespace BaseLib
             return dataTable;
         }
 
+        #endregion
+
+        #region String
+        /// <summary>
+        /// 字串的雜湊與鹽值
+        /// </summary>
+        /// <param name="Value">字串值</param>
+        /// <param name="Type">雜湊類型</param>
+        /// <param name="HashData">字串雜湊值</param>
+        /// <param name="SaltData">字串鹽值</param>
+        public static void StringHash(this string Value, Type Type, out byte[] HashData, out byte[] SaltData)
+        {
+            if (string.IsNullOrEmpty(Value))
+            {
+                HashData = Array.Empty<byte>();
+                SaltData = Array.Empty<byte>();
+            }
+            else
+            {
+                if (Type.ToString().Contains("HMACSHA1"))
+                {
+                    using var hmac = new HMACSHA1();
+                    SaltData = hmac.Key;
+                    HashData = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value));
+                }
+                else if (Type.ToString().Contains("HMACSHA256"))
+                {
+                    using var hmac = new HMACSHA256();
+                    SaltData = hmac.Key;
+                    HashData = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value));
+                }
+                else if (Type.ToString().Contains("HMACSHA384"))
+                {
+                    using var hmac = new HMACSHA384();
+                    SaltData = hmac.Key;
+                    HashData = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value));
+                }
+                else
+                {
+                    using var hmac = new HMACSHA512();
+                    SaltData = hmac.Key;
+                    HashData = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value));
+                }
+            }
+        }
+
+        /// <summary>
+        /// 驗證雜湊字串值
+        /// </summary>
+        /// <param name="Value">字串值</param>
+        /// <param name="Type">雜湊類型</param>
+        /// <param name="HashData">字串雜湊值</param>
+        /// <param name="SaltData">字串鹽值</param>
+        public static bool VerifyStringHash(this string Value, Type Type, byte[] HashData, byte[] SaltData)
+        {
+            if (string.IsNullOrEmpty(Value)) return false;
+            if (SaltData == null || SaltData.Length == 0) return false;
+            if (HashData == null || HashData.Length == 0) return false;
+
+            byte[] computedHash = Type.ToString() switch
+            {
+                "System.Security.Cryptography.HMACSHA1" => new HMACSHA1(SaltData).ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value)),
+                "System.Security.Cryptography.HMACSHA256" => new HMACSHA256(SaltData).ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value)),
+                "System.Security.Cryptography.HMACSHA384" => new HMACSHA384(SaltData).ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value)),
+                "System.Security.Cryptography.HMACSHA512" => new HMACSHA512(SaltData).ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value)),
+                _ => new HMACSHA512(SaltData).ComputeHash(System.Text.Encoding.UTF8.GetBytes(Value)),
+            };
+
+            return computedHash.SequenceEqual(HashData);
+        }
         #endregion
     }
 }

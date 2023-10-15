@@ -1,13 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 
-using Service;
+using Infrastructure.ApiFilter;
 using BasicConfig;
+using Service;
 
 namespace Infrastructure
 {
     /// <summary>
     /// Api 基底元件
     /// </summary>
+    [EnableCors("_demoAllowSpecificOrigins")]
+    [Route("api/[controller]/[action]")]
+    [ServiceFilter(typeof(ApiActionFilterAttribute))] // (Service-Filter-3)
+    [ApiController]
     public class DefaultController : ControllerBase
     {
         /// <summary>
@@ -24,7 +30,7 @@ namespace Infrastructure
         /// UserData
         /// </summary>
         /// <value></value>
-        public UserData UserData
+        public DefalutUserData UserData
         {
             get
             {

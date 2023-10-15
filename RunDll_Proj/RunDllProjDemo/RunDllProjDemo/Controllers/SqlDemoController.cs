@@ -10,7 +10,7 @@ using SqlCls;
 using SqlLib.SqlTool;
 using BaseLib;
 
-namespace RunDllProjDemo.Controllers
+namespace Controllers.API
 {
     [Tags("SqlDemo")]
     [EnableCors("_demoAllowSpecificOrigins")]

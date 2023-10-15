@@ -1,6 +1,8 @@
-﻿using Infrastructure.ApiFilter;
+﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
+
 using JwtLib;
 using MailLib;
+using Service;
 using ServiceLib;
 using SqlLib.SqlTool;
 using SwaggerLib;
@@ -8,15 +10,21 @@ using System.Reflection;
 
 namespace Infrastructure
 {
-    // Program
+    /// <summary>
+    /// 預設執行 Program
+    /// </summary>
     public static class DefaultProgram
     {
+        /// <summary>
+        /// 初始設定
+        /// </summary>
+        /// <param name="builder">指定服務描述項集合的合約</param>
         public static void Init(this WebApplicationBuilder builder)
         {
-            // (Jwt-3、4) 3與4一起設定的方式
+            // Jwt 參數設定與設定權限驗證
             builder.JwtBuilderInit();
 
-            // (Swag-1) 設定方式 1
+            // Swagger 使用 JWT 驗證 並產生 Xml 檔
             builder.SwaggerBuilderInit(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
         }
 
@@ -26,11 +34,6 @@ namespace Infrastructure
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetConfig(this WebApplicationBuilder builder)
         {
-            // JwtSettings
-            //JwtSettings.Issuer = builder.Configuration["JwtSettings:Issuer"];
-            //JwtSettings.Audience = builder.Configuration["JwtSettings:Audience"];
-            //JwtSettings.SecretKey = builder.Configuration["JwtSettings:SecretKey"];
-
             // MailConfig
             MailConfig.Host = builder.Configuration["MailConfig:Host"];
             MailConfig.Port = Convert.ToInt32(builder.Configuration["MailConfig:Port"]);
@@ -43,17 +46,6 @@ namespace Infrastructure
             SqlSetting.StrConnection1 = builder.Configuration["ConnectionStrings:StrConnection1"];
             SqlSetting.StrConnection2 = builder.Configuration["ConnectionStrings:StrConnection2"];
             SqlSetting.StrConnection3 = builder.Configuration["ConnectionStrings:StrConnection3"];
-        }
-
-        /// <summary>
-        /// set service
-        /// </summary>
-        /// <param name="builder">指定服務描述項集合的合約</param>
-        public static void SetService(this WebApplicationBuilder builder)
-        {
-            //builder.AddJwtSwagger();
-            //builder.AddSwaggerDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
-            //builder.AddJwtAuthentication(TimeSpan.FromMinutes(5));
         }
 
         /// <summary>
@@ -93,8 +85,12 @@ namespace Infrastructure
         /// <param name="builder">指定服務描述項集合的合約</param>
         public static void SetScoped(this WebApplicationBuilder builder)
         {
+            // UserService HttpContextAccessor
             builder.AddServiceScoped();
-            builder.Services.AddScoped<ApiActionFilterAttribute>();
+
+            // LogService
+            builder.Services.AddScoped<ILogService, LogService>();
+            builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
         }
 
         /// <summary>
@@ -103,15 +99,9 @@ namespace Infrastructure
         /// <param name="app">Web 應用程序</param>
         public static void AppBuilder(this WebApplication app)
         {
-            //if (app.Environment.IsDevelopment())
-            //{
-            //    //app.UseSwaggerPage();
-            //    app.UseSwaggerPageWithDoc(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
-            //}
-
             if (app.Environment.IsDevelopment())
             {
-                //app.SwaggerAppInit();
+                // Swagger 使用產生的 Xml 檔 (顯示 summary 註釋)
                 app.SwaggerAppInit(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
             }
         }

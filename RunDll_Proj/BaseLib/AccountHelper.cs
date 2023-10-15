@@ -5,7 +5,7 @@ namespace BaseLib
     public class AccountHelper
     {
         /// <summary>
-        /// 創建密碼的雜湊與鹽值
+        /// 創建密碼的雜湊與鹽值 (HMACSHA512)
         /// </summary>
         /// <param name="Password">密碼</param>
         /// <param name="PasswordHash">密碼雜湊值</param>
@@ -19,14 +19,16 @@ namespace BaseLib
             }
             else
             {
-                using var hmac = new HMACSHA512();
-                PasswordSalt = hmac.Key;
-                PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
+                Password.StringHash(new HMACSHA512().GetType(), out PasswordHash, out PasswordSalt);
+
+                //using var hmac = new HMACSHA512();
+                //PasswordSalt = hmac.Key;
+                //PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
             }
         }
 
         /// <summary>
-        /// 驗證密碼
+        /// 驗證密碼 (HMACSHA512)
         /// </summary>
         /// <param name="Password">密碼</param>
         /// <param name="PasswordHash">密碼雜湊值</param>
@@ -38,9 +40,11 @@ namespace BaseLib
             if (PasswordSalt == null || PasswordSalt.Length == 0) return false;
             if (PasswordHash == null || PasswordHash.Length == 0) return false;
 
-            using var hmac = new HMACSHA512(PasswordSalt);
-            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
-            return computedHash.SequenceEqual(PasswordHash);
+            return Password.VerifyStringHash(new HMACSHA512().GetType(), PasswordHash, PasswordSalt);
+
+            //using var hmac = new HMACSHA512(PasswordSalt);
+            //var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
+            //return computedHash.SequenceEqual(PasswordHash);
         }
     }
 }

@@ -439,7 +439,7 @@ namespace SqlCls
             return ExecuteBatchActData(SqlSetting.StrConnection2, strSql_Insert, strSql_Update, strSql_Delete, actTable, param_Insert, param_Update, param_Delete);
         }
 
-        public static string ExecuteBatchActData(string strConnection, string strSql_Insert, string strSql_Update, string strSql_Delete, DataTable actTable, SqlParameter[] param_Insert, SqlParameter[] param_Update, SqlParameter[] param_Delete)
+        public static string ExecuteBatchActData(string strConnection, string? strSql_Insert, string? strSql_Update, string? strSql_Delete, DataTable actTable, SqlParameter[]? param_Insert, SqlParameter[]? param_Update, SqlParameter[]? param_Delete)
         {
             try
             {
