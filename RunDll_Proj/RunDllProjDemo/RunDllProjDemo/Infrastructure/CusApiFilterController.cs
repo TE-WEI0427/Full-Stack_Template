@@ -54,6 +54,7 @@ namespace Infrastructure
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="userService"></param>
+        /// <param name="environment"></param>
         public CusApiFilterController(IConfiguration configuration, IUserService userService, IWebHostEnvironment environment)
         {
             this.Configuration = configuration;

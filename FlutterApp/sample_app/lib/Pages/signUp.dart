@@ -13,7 +13,7 @@ class _SignupState extends State<Signup> {
   final FocusNode _focusNodeEmail = FocusNode();
   final FocusNode _focusNodePassword = FocusNode();
   final FocusNode _focusNodeConfirmPassword = FocusNode();
-  final TextEditingController _controllerUsername = TextEditingController();
+  final TextEditingController _controllerUserId = TextEditingController();
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
   final TextEditingController _controllerConFirmPassword =
@@ -34,20 +34,20 @@ class _SignupState extends State<Signup> {
             children: [
               const SizedBox(height: 100),
               Text(
-                "Register",
+                "帳戶註冊",
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 10),
               Text(
-                "Create your account",
+                "建立你的帳號",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 35),
               TextFormField(
-                controller: _controllerUsername,
+                controller: _controllerUserId,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
-                  labelText: "Username",
+                  labelText: "帳號",
                   prefixIcon: const Icon(Icons.person_outline),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -58,9 +58,9 @@ class _SignupState extends State<Signup> {
                 ),
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter username.";
+                    return "請輸入要註冊的帳號";
                   } else if (isRegister) {
-                    return "Username is already registered.";
+                    return "該帳號已被註冊";
                   }
 
                   return null;
@@ -73,7 +73,7 @@ class _SignupState extends State<Signup> {
                 focusNode: _focusNodeEmail,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                  labelText: "Email",
+                  labelText: "電子郵件",
                   prefixIcon: const Icon(Icons.email_outlined),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -84,9 +84,9 @@ class _SignupState extends State<Signup> {
                 ),
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter email.";
+                    return "請輸入電子郵件";
                   } else if (!(value.contains('@') && value.contains('.'))) {
-                    return "Invalid email";
+                    return "無效的電子郵件";
                   }
                   return null;
                 },
@@ -99,7 +99,7 @@ class _SignupState extends State<Signup> {
                 focusNode: _focusNodePassword,
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
-                  labelText: "Password",
+                  labelText: "密碼",
                   prefixIcon: const Icon(Icons.password_outlined),
                   suffixIcon: IconButton(
                       onPressed: () {
@@ -119,9 +119,9 @@ class _SignupState extends State<Signup> {
                 ),
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter password.";
+                    return "請輸入密碼";
                   } else if (value.length < 8) {
-                    return "Password must be at least 8 character.";
+                    return "密碼最少包含8個字元";
                   }
                   return null;
                 },
@@ -135,7 +135,7 @@ class _SignupState extends State<Signup> {
                 focusNode: _focusNodeConfirmPassword,
                 keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
-                  labelText: "Confirm Password",
+                  labelText: "確認密碼",
                   prefixIcon: const Icon(Icons.password_outlined),
                   suffixIcon: IconButton(
                       onPressed: () {
@@ -155,9 +155,9 @@ class _SignupState extends State<Signup> {
                 ),
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter password.";
+                    return "請再次輸入密碼";
                   } else if (value != _controllerPassword.text) {
-                    return "Password doesn't match.";
+                    return "密碼不正確";
                   }
                   return null;
                 },
@@ -185,7 +185,7 @@ class _SignupState extends State<Signup> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             behavior: SnackBarBehavior.floating,
-                            content: const Text("Registered Successfully"),
+                            content: const Text("註冊成功"),
                           ),
                         );
 
@@ -194,15 +194,15 @@ class _SignupState extends State<Signup> {
                         Navigator.pop(context);
                       }
                     },
-                    child: const Text("Register"),
+                    child: const Text("送出"),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Already have an account?"),
+                      const Text("已經擁有帳戶?"),
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: const Text("Login"),
+                        child: const Text("登入"),
                       ),
                     ],
                   ),
@@ -220,7 +220,7 @@ class _SignupState extends State<Signup> {
     _focusNodeEmail.dispose();
     _focusNodePassword.dispose();
     _focusNodeConfirmPassword.dispose();
-    _controllerUsername.dispose();
+    _controllerUserId.dispose();
     _controllerEmail.dispose();
     _controllerPassword.dispose();
     _controllerConFirmPassword.dispose();

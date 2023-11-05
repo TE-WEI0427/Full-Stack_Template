@@ -1,6 +1,8 @@
-﻿using System.Data;
+﻿using Newtonsoft.Json;
+using System.Data;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json.Nodes;
 
 namespace BaseLib
@@ -103,6 +105,26 @@ namespace BaseLib
 
         #endregion
 
+        #region Number
+
+        /// <summary>
+        /// 取得設定長度的亂數
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static string GetRandoms(this int length)
+        {
+            string str = "";
+            Random random = new();
+            for (int i = 0; i < length; i++)
+            {
+                str += random.Next(0, 10);
+            }
+            return str;
+        }
+
+        #endregion
+
         #region String
         /// <summary>
         /// 字串的雜湊與鹽值
@@ -171,6 +193,64 @@ namespace BaseLib
 
             return computedHash.SequenceEqual(HashData);
         }
+
+        /// <summary>
+        /// Base64Url 字串解碼
+        /// </summary>
+        /// <param name="base64UrlEncodedString">Base64Url 字串</param>
+        /// <returns></returns>
+        public static string Base64UrlDecode(this string base64UrlEncodedString)
+        {
+            // Step 1: Replace URL-specific characters
+            string base64String = base64UrlEncodedString.Replace('-', '+').Replace('_', '/');
+
+            // Step 2: Pad with '=' characters if needed
+            int padding = (4 - (base64String.Length % 4)) % 4;
+            base64String = base64String.PadRight(base64String.Length + padding, '=');
+
+            // Step 3: Decode the Base64 string
+            byte[] bytes = Convert.FromBase64String(base64String);
+            string decodedString = Encoding.UTF8.GetString(bytes);
+
+            return decodedString;
+        }
+
+        /// <summary>
+        /// 字串進行 Base64Url 編碼
+        /// </summary>
+        /// <param name="originalString">字串值</param>
+        /// <returns></returns>
+        public static string Base64UrlEncode(this string originalString)
+        {
+            // Step 1: Convert the string to Base64
+            byte[] bytes = Encoding.UTF8.GetBytes(originalString);
+            string base64String = Convert.ToBase64String(bytes);
+
+            // Step 2: Replace characters for URL safety
+            string base64UrlEncodedString = base64String
+                .Replace('+', '-')
+                .Replace('/', '_');
+
+            // Step 3: Remove padding '=' characters
+            base64UrlEncodedString = base64UrlEncodedString.TrimEnd('=');
+
+            return base64UrlEncodedString;
+        }
+        #endregion
+
+        #region class
+
+        /// <summary>
+        /// class to json
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static string JsonData<T>(this object t) where T : class
+        {
+            return JsonConvert.SerializeObject(t);
+        }
+
         #endregion
     }
 }

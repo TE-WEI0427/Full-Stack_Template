@@ -41,9 +41,9 @@ namespace SwaggerLib
         /// <param name="app">Web 應用程序</param>
         /// <param name="Title">專案名稱</param>
         /// <param name="Version">版本號</param>
-        public static void SwaggerAppInit(this WebApplication app, string Title, string Version)
+        public static void SwaggerAppInit(this WebApplication app, string RoutePrefix, string Title, string Version)
         {  
-            app.UseSwaggerPageWithDoc(Title, Version);
+            app.UseSwaggerPageWithDoc(RoutePrefix, Title, Version);
         }
     }
 }

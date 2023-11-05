@@ -56,7 +56,6 @@ namespace Controllers.API
             {
                 { "SysUserId", UserData.SysUserId },
                 { "Platform", UserData.Platform },
-                { "Model", UserData.Model },
                 { "UUID", UserData.UUID },
                 { "Memo", UserData.Memo },
                 { "ClientIp", UserData.ClientIp }

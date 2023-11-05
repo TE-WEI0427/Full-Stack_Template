@@ -99,11 +99,11 @@ namespace Infrastructure
         /// <param name="app">Web 應用程序</param>
         public static void AppBuilder(this WebApplication app)
         {
-            if (app.Environment.IsDevelopment())
-            {
-                // Swagger 使用產生的 Xml 檔 (顯示 summary 註釋)
-                app.SwaggerAppInit(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
-            }
+
+            // Swagger 使用產生的 Xml 檔 (顯示 summary 註釋)
+            string RoutePrefix = app.Environment.IsDevelopment() ? string.Empty : "AndySwagger";
+            app.SwaggerAppInit(RoutePrefix, Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
+
         }
     }
 }

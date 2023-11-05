@@ -2,19 +2,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-String getAppBarTitle() {
-  return kIsWeb
-      ? 'Web Browser info'
-      : switch (defaultTargetPlatform) {
-          TargetPlatform.android => 'Android Device Info',
-          TargetPlatform.iOS => 'iOS Device Info',
-          TargetPlatform.linux => 'Linux Device Info',
-          TargetPlatform.windows => 'Windows Device Info',
-          TargetPlatform.macOS => 'MacOS Device Info',
-          TargetPlatform.fuchsia => 'Fuchsia Device Info',
-        };
-}
-
 Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
   return <String, dynamic>{
     'version.securityPatch': build.version.securityPatch,
@@ -64,11 +51,11 @@ Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
     'localizedModel': data.localizedModel,
     'identifierForVendor': data.identifierForVendor,
     'isPhysicalDevice': data.isPhysicalDevice,
-    'utsname.sysname:': data.utsname.sysname,
-    'utsname.nodename:': data.utsname.nodename,
-    'utsname.release:': data.utsname.release,
-    'utsname.version:': data.utsname.version,
-    'utsname.machine:': data.utsname.machine,
+    'utsname.sysname': data.utsname.sysname,
+    'utsname.nodename': data.utsname.nodename,
+    'utsname.release': data.utsname.release,
+    'utsname.version': data.utsname.version,
+    'utsname.machine': data.utsname.machine,
   };
 }
 

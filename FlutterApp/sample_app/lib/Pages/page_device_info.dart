@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:sample_app/BaseConfig/config_appbar.dart';
@@ -16,6 +17,19 @@ class PageDEviceInfo extends StatefulWidget {
 }
 
 class _PageDEviceInfoState extends State<PageDEviceInfo> {
+  String getAppBarTitle() {
+    return kIsWeb
+        ? 'Web Browser info'
+        : switch (defaultTargetPlatform) {
+            TargetPlatform.android => 'Android Device Info',
+            TargetPlatform.iOS => 'iOS Device Info',
+            TargetPlatform.linux => 'Linux Device Info',
+            TargetPlatform.windows => 'Windows Device Info',
+            TargetPlatform.macOS => 'MacOS Device Info',
+            TargetPlatform.fuchsia => 'Fuchsia Device Info',
+          };
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

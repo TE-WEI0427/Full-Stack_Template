@@ -33,10 +33,6 @@
         /// </summary>
         public string Platform { get; set; } = string.Empty;
         /// <summary>
-        /// Device Model
-        /// </summary>
-        public string Model { get; set; } = string.Empty;
-        /// <summary>
         /// Device UUID
         /// </summary>
         public string UUID { get; set; } = string.Empty;

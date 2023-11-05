@@ -125,11 +125,10 @@ namespace Infrastructure
             //}
 
             // (Swag-2) 設定方式 2
-            if (app.Environment.IsDevelopment())
-            {
-                //app.SwaggerAppInit();
-                app.SwaggerAppInit(Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
-            }
+            //app.SwaggerAppInit();
+            string RoutePrefix = app.Environment.IsDevelopment() ? string.Empty : "AndySwagger";       
+            app.SwaggerAppInit(RoutePrefix, Assembly.GetExecutingAssembly().GetName().Name ?? "swaggerDoc", "v1");
+
         }
     }
 }

@@ -37,7 +37,6 @@ namespace Infrastructure
                 {
                     SysUserId = int.TryParse(this.UserService?.GetUserInfo("SysUserId"), out int val_sysUserId) ? val_sysUserId : 0,
                     Platform = this.UserService?.GetUserInfo("Platform") ?? "",
-                    Model = this.UserService?.GetUserInfo("Model") ?? "",
                     UUID = this.UserService?.GetUserInfo("UUID") ?? "",
                     Memo = this.UserService?.GetUserInfo("Memo") ?? "",
                     ClientIp = this.UserService?.GetUserInfo("ClientIp") ?? ""

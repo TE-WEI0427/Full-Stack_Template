@@ -1,15 +1,5 @@
 import 'package:geolocator/geolocator.dart';
 
-Future<void> checkLocationPermission() async {
-  LocationPermission permission = await Geolocator.checkPermission();
-
-  // switch (permission) {
-  //   case value:
-  //     break;
-  //   default:
-  // }
-}
-
 /// 確定裝置的目前位置
 ///
 /// 當位置服務未啟用或權限被拒絕時，「Future」將傳回錯誤。

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mL6CxQFQc699qEcmSVPbkOP1MHCiW2ikUnWJMSrgP+LgRP44//ECFH7eUBkjj+K5ETkWRa2k6wgEdRtjqY2+5g==",
+  "success": true,
+  "projectFilePath": "D:\\AndyWorkspace\\MyProject\\Full-Stack_Template\\RunDll_Proj\\OAuth20Lib\\OAuth20Lib.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\identitymodel\\6.2.0\\identitymodel.6.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
