@@ -20,5 +20,20 @@
             /// </summary>
             public string Email { get; set; } = string.Empty;
         }
+
+        /// <summary>
+        /// App 使用者 登入
+        /// </summary>
+        public class Login
+        {
+            /// <summary>
+            /// 使用者帳號/信箱
+            /// </summary>
+            public string Account { get; set; } = string.Empty;
+            /// <summary>
+            /// 使用者密碼
+            /// </summary>
+            public string Password { get; set; } = string.Empty;
+        }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.Data;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Data.SqlClient;
 
 using Infrastructure;
@@ -15,11 +16,6 @@ using BaseLib;
 using SqlCls;
 using SqlLib.SqlTool;
 using MailLib;
-using Microsoft.AspNetCore.Identity;
-using System.Reflection;
-using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using static System.Net.WebRequestMethods;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Controllers.App
 {
@@ -72,7 +68,7 @@ namespace Controllers.App
         ///     {
         ///        "userId": "Andy",
         ///        "password": "19980427",
-        ///        "email": "vm62k6jo6@gmai.com"
+        ///        "email": "vm62k6jo6@gmail.com"
         ///     }
         /// </remarks>
         [AllowAnonymous]
@@ -158,7 +154,7 @@ namespace Controllers.App
                     strSql.AppendLine(" VALUES ");
                     strSql.AppendLine(" (@userId, @userName, @userPassword, @PasswordHash, @PasswordSalt, @userEmail) ");
                     strSql.AppendLine(" SELECT @sysUserId = SCOPE_IDENTITY() ");
-                    errStr = SqlTool.ExecuteNonQuery(SqlSetting.StrConnection1, strSql.ToString(), param);
+                    errStr = SqlTool.ExecuteNonQuery(SqlSetting.StrConnection1, strSql.ToString(), param2);
 
                     if (string.IsNullOrEmpty(errStr))
                     {
@@ -174,7 +170,13 @@ namespace Controllers.App
                     else
                     {
                         // 建立帳戶資料失敗，若是唯一索引的錯誤，覆寫錯誤訊息
-                        if (errStr.Contains("唯一索引")) errStr = "註冊失敗，該帳號已被註冊";
+                        if (errStr.Contains("唯一索引")) 
+                        { 
+                            if (errStr.Contains("IX_S10_users_userId"))
+                                errStr = "註冊失敗，帳號已被註冊";
+                            if (errStr.Contains("IX_S10_users_userEmail"))
+                                errStr = "註冊失敗，信箱已被使用";
+                        }
                     }
                 }
             }
@@ -246,7 +248,7 @@ namespace Controllers.App
             }
             catch (Exception ex)
             {
-                result.ResultCode = ResultCode.Failed;
+                result.ResultCode = ResultCode.Exception;
                 result.Message = ex.Message;
             }
 
@@ -262,7 +264,7 @@ namespace Controllers.App
                 else
                 {
                     result.ResultCode = ResultCode.Success;
-                    result.Message = "註冊完成，請至信箱進行確認";
+                    result.Message = "可進行登入";
                 }
             }
 
@@ -276,16 +278,47 @@ namespace Controllers.App
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(AppUserData model)
+        public ActionResult Login(MDSys.Login model)
         {
             Result result = new();
 
-            JsonObject jo = new()
+            try
             {
-                { "token", JwtLib.JwtHelper.CreateToken(model, 365) }
-            };
+                SqlParameter[] param = {
+                    new SqlParameter("Account", SqlDbType.VarChar, 50, ParameterDirection.InputOutput, false, 0, 0, "", DataRowVersion.Proposed, model.Account),
+                    new SqlParameter("userPassword", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "", DataRowVersion.Proposed, model.Password)
+                };
+                strSql.Clear();
+                strSql.AppendLine(" SELECT userPassword, PasswordSalt FROM S10_users WHERE userId=@Account OR userEmail=@Account ");
+                DataTable tbl_users = SqlTool.GetDataTable(SqlSetting.StrConnection1, strSql.ToString(), "S10_users", param);
 
-            result.Data = jo;
+                // 進行密碼驗證
+                string PasswordHash = tbl_users.Rows[0]["userPassword"].ToString() ?? "";
+                string PasswordSalt = tbl_users.Rows[0]["PasswordSalt"].ToString() ?? "";
+                bool isVerify = AccountHelper.VerifyPasswordHash(model.Password, Convert.FromBase64String(PasswordHash), Convert.FromBase64String(PasswordSalt));
+
+                if (isVerify == false) throw new Exception("授權失敗");
+            }
+            catch (Exception ex)
+            {
+                result.ResultCode = ResultCode.Exception;
+                result.Message = ex.Message;
+            }
+
+            // 未執行例外錯誤
+            if (result.ResultCode != ResultCode.Exception)
+            {
+                // 確認整體流程成功還是失敗
+                if (string.IsNullOrEmpty(errStr) == false)
+                {
+                    result.ResultCode = ResultCode.Failed;
+                    result.Message = errStr;
+                }
+                else
+                {
+                    result.ResultCode = ResultCode.Success;
+                }
+            }
 
             return Ok(result);
         }
